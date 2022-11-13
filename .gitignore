@@ -1,0 +1,4 @@
+#? Compiled File
+*.exe
+#? .vsCode folder
+.vscode
