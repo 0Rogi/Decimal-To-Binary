@@ -7,7 +7,7 @@ using namespace std;
 int main()
 {
     //? Dichiara il numero decimale e la base
-    int decimalnumber;
+    float decimalnumber;
     const int base = 2;
 
     //? Legge il numero da convertire
@@ -17,7 +17,7 @@ int main()
     cin >> decimalnumber;
 
     string result;
-    int number = decimalnumber;
+    float number = decimalnumber;
     int divisionremainder;
     int i = 0;
 
@@ -45,8 +45,38 @@ int main()
     //? Inverte la stringa
     reverse(result.begin(), result.end());
 
+    //? Controlla se c'è una parte decimale
+    int wholepart = floor(decimalnumber);
+    float decimalpart = decimalnumber - wholepart;
+
+    if (decimalpart != 0) //? Se c'è una parte decimale
+    {
+        //? Legge quante volte la parte decimale deve essere calcolata
+        int iteration;
+        cout << "Inserisci il numero di volte che la parte decimale deve essere calcolata (2 di default): ";
+        cin >> iteration;
+        //? Se il numero di volte è minore di 0 o inesistente, mette 2 di defaul
+        if (!iteration || iteration < 1)
+        {
+            iteration = 2;
+        }
+
+        //? Trasforma la parte decimale in binario
+        string decimalresult = ".";
+
+        for (i = 0; i < iteration; i++)
+        {
+            wholepart = floor(decimalpart * 2);
+            decimalpart = decimalpart * 2 - wholepart;
+
+            decimalresult = decimalresult + to_string(wholepart)[0];
+        }
+
+        result = result + decimalresult;
+    }
+
     //? Stampa il numero
-    cout << "Il numero " << decimalnumber << ", in codice binario e': " << result << endl;
+    cout << "Il numero " << decimalnumber << " in codice binario e': " << result << endl;
 
     //? Finisce il programma
     cout << "Premi un tasto per uscire dal programma ";
